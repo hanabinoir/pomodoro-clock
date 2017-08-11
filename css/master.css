@@ -1,0 +1,45 @@
+.clock-settings input {
+    width: 45px;
+}
+
+.clock-settings i,
+.default-session i {
+    width: 30px;
+    font-size: 18px;
+}
+
+.fa-check {
+    color: green;
+    cursor: pointer;
+}
+
+.fa-remove {
+    color: red;
+    cursor: pointer;
+}
+
+.fa-refresh {
+    cursor: pointer;
+}
+
+.fa-plus {
+    color: blue;
+    cursor: pointer;
+}
+
+.default-session input {
+    width: 45px;
+}
+
+
+.clock-settings .col-xs-1 .fa-remove {
+    visibility: hidden;
+}
+
+.default-session .col-xs-2 {
+    visibility: hidden;
+}
+
+.progress {
+    cursor: pointer;
+}
