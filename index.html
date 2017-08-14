@@ -18,7 +18,7 @@
           <input
           type="number"
           id="session-length"
-          value="25">
+          value="3">
         </label>
       </div>
       <div class="col-sm-3">
@@ -27,7 +27,7 @@
           <input
           type="number"
           id="break-length"
-          value="5">
+          value="1">
         </label>
       </div>
       <div class="col-sm-3">
@@ -40,15 +40,19 @@
         </label>
       </div>
       <div class="col-xs-1">
-        <i class="sessions-set fa fa-check"></i>
-        <i class="fa fa-remove"></i>
+        <i
+        class="sessions-set fa fa-check"
+        ng-click="setSessions"></i>
+        <i
+        class="fa fa-remove"
+        ng-click="resetSessions"></i>
       </div>
     </div>
   </header>
   <body>
     <div
     class="container text-center">
-      <div class="row default-session">
+      <div class="row default-session pom-sess">
         <div class="col-sm-3">
           <label for="default-session">
             Default Session:
@@ -90,8 +94,10 @@
         </div>
       </div>
       <div
-      class="row"
-      ng-repeat="session in sessions">
+      class="row pom-sess"
+      ng-repeat="session in sessions"
+      ng-mouseover="displayButtons($event)"
+      ng-mouseleave="hideButtons($event)">
         <div class="col-sm-3">
           <label for="session">
             {{session.sessionLabel}}:
@@ -99,21 +105,24 @@
             type="number"
             id="{{session.sessionId}}"
             disabled="true"
-            value="{{session.sessionLength}}">
+            ng-value="{{session.sessionLength}}">
           </label>
         </div>
         <div class="col-sm-3">
-          <label for="default-break">
-            {{session.brekLable}}:
+          <label for="break">
+            {{session.breakLable}}:
             <input
             type="number"
             id="{{session.breakId}}"
             disabled="true"
-            value="{{session.breakLength}}">
+            ng-value="{{session.breakLength}}">
           </label>
         </div>
         <div class="col-sm-3">
-          <div class="progress text-center">
+          <div
+          class="progress text-center"
+          ng-mouseover="displayMessage($event)"
+          ng-mouseleave="hideMessage($event)">
             <div
             class="progress-bar"
             role="progressbar"

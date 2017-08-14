@@ -29,7 +29,7 @@ $(document).ready(function() {
       }
     });
 
-  $(".default-session").hover(function() {
+  $(".pom-sess").hover(function() {
       $(this).find('.col-xs-2').css('visibility', 'visible');
   }, function() {
       $(this).find('.col-xs-2').css('visibility', 'hidden');

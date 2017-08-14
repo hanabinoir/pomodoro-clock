@@ -28,46 +28,21 @@ $(document).ready(function() {
       } else {
         clearInterval(breakTimer);
       }
+      $("#seces").html('00');
 
       $(this).find("#message").html("Cleared");
       $(this).prop("disabled", true);
     }
-  });
-});
 
-function cdStart() {
-  secs -= 1;
-
-  if (secs < 0) {
-    secs = 59;
-    sessionTime -= 1;
-  }
-
-  $("#mins").html(sessionTime);
-
-  if (secs < 10) {
-    $("#secs").html('0' + secs);
-  } else {
-    $("#secs").html(secs);
-  }
-
-  if (sessionTime <= 0 && secs <= 0) {
-    clearInterval(sessionTimer);
-    secs = 0;
-    console.log("Session finished");
-    session = false;
-
-    $("#mins").html(breakTime);
-    $("#secs").html('00');
-    breakTimer = setInterval(function() {
+    function cdStart() {
       secs -= 1;
 
       if (secs < 0) {
         secs = 59;
-        breakTime -= 1;
+        sessionTime -= 1;
       }
 
-      $("#mins").html(breakTime);
+      $("#mins").html(sessionTime);
 
       if (secs < 10) {
         $("#secs").html('0' + secs);
@@ -75,12 +50,38 @@ function cdStart() {
         $("#secs").html(secs);
       }
 
-      if (breakTime <= 0 && secs <= 0) {
-        clearInterval(breakTimer);
-        console.log("Break finished");
-        $(this).find("#message").html("Finished");
-        $(this).prop("disabled", true);
+      if (sessionTime <= 0 && secs <= 0) {
+        clearInterval(sessionTimer);
+        secs = 0;
+        console.log("Session finished");
+        session = false;
+
+        $("#mins").html(breakTime);
+        $("#secs").html('00');
+        breakTimer = setInterval(function() {
+          secs -= 1;
+
+          if (secs < 0) {
+            secs = 59;
+            breakTime -= 1;
+          }
+
+          $("#mins").html(breakTime);
+
+          if (secs < 10) {
+            $("#secs").html('0' + secs);
+          } else {
+            $("#secs").html(secs);
+          }
+
+          if (breakTime <= 0 && secs <= 0) {
+            clearInterval(breakTimer);
+            console.log("Break finished");
+            $(this).find("#message").html("Finished");
+            $(this).prop("disabled", true);
+          }
+        }, 1000);
       }
-    }, 1000);
-  }
-}
+    }
+  });
+});

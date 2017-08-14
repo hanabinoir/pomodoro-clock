@@ -3,7 +3,7 @@
 }
 
 .clock-settings i,
-.default-session i {
+.pom-sess i {
     width: 30px;
     font-size: 18px;
 }
@@ -27,7 +27,7 @@
     cursor: pointer;
 }
 
-.default-session input {
+.pom-sess input {
     width: 45px;
 }
 
@@ -36,7 +36,7 @@
     visibility: hidden;
 }
 
-.default-session .col-xs-2 {
+.pom-sess .col-xs-2 {
     visibility: hidden;
 }
 
