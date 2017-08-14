@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html
+  ng-app="clock"
+  ng-controller="session-ctrl">
   <head>
     <meta charset="utf-8">
     <title>Pomodoro Clock</title>
@@ -45,9 +47,7 @@
   </header>
   <body>
     <div
-    class="container text-center"
-    ng-app="clock"
-    ng-controller="session-ctrl">
+    class="container text-center">
       <div class="row default-session">
         <div class="col-sm-3">
           <label for="default-session">
@@ -81,6 +81,49 @@
             <span id="mins">00</span>:
             <span id="secs">00</span>
             <span id="message">Click to Start</span>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <i class="session-set fa fa-refresh"></i>
+          <i class="fa fa-remove"></i>
+          <i class="fa fa-plus"></i>
+        </div>
+      </div>
+      <div
+      class="row"
+      ng-repeat="session in sessions">
+        <div class="col-sm-3">
+          <label for="session">
+            {{session.sessionLabel}}:
+            <input
+            type="number"
+            id="{{session.sessionId}}"
+            disabled="true"
+            value="{{session.sessionLength}}">
+          </label>
+        </div>
+        <div class="col-sm-3">
+          <label for="default-break">
+            {{session.brekLable}}:
+            <input
+            type="number"
+            id="{{session.breakId}}"
+            disabled="true"
+            value="{{session.breakLength}}">
+          </label>
+        </div>
+        <div class="col-sm-3">
+          <div class="progress text-center">
+            <div
+            class="progress-bar"
+            role="progressbar"
+            style="width: 25%"
+            aria-valuenow="25"
+            aria-valuemin="0"
+            aria-valuemax="100"></div>
+            <span id="mins">{{session.sessionLength}}</span>:
+            <span id="secs">00</span>
+            <span id="message">Not started</span>
           </div>
         </div>
         <div class="col-xs-2">

@@ -18,55 +18,7 @@ $(document).ready(function() {
       started = true;
       session = true;
 
-      sessionTimer = setInterval(function() {
-        secs -= 1;
-
-        if (secs < 0) {
-          secs = 59;
-          sessionTime -= 1;
-        }
-
-        $("#mins").html(sessionTime);
-
-        if (secs < 10) {
-          $("#secs").html('0' + secs);
-        } else {
-          $("#secs").html(secs);
-        }
-
-        if (sessionTime <= 0 && secs <= 0) {
-          clearInterval(sessionTimer);
-          secs = 0;
-          console.log("Session finished");
-          session = false;
-
-          $("#mins").html(breakTime);
-          $("#secs").html('00');
-          breakTimer = setInterval(function() {
-            secs -= 1;
-
-            if (secs < 0) {
-              secs = 59;
-              breakTime -= 1;
-            }
-
-            $("#mins").html(breakTime);
-
-            if (secs < 10) {
-              $("#secs").html('0' + secs);
-            } else {
-              $("#secs").html(secs);
-            }
-
-            if (breakTime <= 0 && secs <= 0) {
-              clearInterval(breakTimer);
-              console.log("Break finished");
-              $(this).find("#message").html("Finished");
-              $(this).prop("disabled", true);
-            }
-          }, 1000);
-        }
-      }, 1000);
+      sessionTimer = setInterval(cdStart, 1000);
     } else {
 
       console.log("Session in process: " + session);
@@ -82,3 +34,53 @@ $(document).ready(function() {
     }
   });
 });
+
+function cdStart() {
+  secs -= 1;
+
+  if (secs < 0) {
+    secs = 59;
+    sessionTime -= 1;
+  }
+
+  $("#mins").html(sessionTime);
+
+  if (secs < 10) {
+    $("#secs").html('0' + secs);
+  } else {
+    $("#secs").html(secs);
+  }
+
+  if (sessionTime <= 0 && secs <= 0) {
+    clearInterval(sessionTimer);
+    secs = 0;
+    console.log("Session finished");
+    session = false;
+
+    $("#mins").html(breakTime);
+    $("#secs").html('00');
+    breakTimer = setInterval(function() {
+      secs -= 1;
+
+      if (secs < 0) {
+        secs = 59;
+        breakTime -= 1;
+      }
+
+      $("#mins").html(breakTime);
+
+      if (secs < 10) {
+        $("#secs").html('0' + secs);
+      } else {
+        $("#secs").html(secs);
+      }
+
+      if (breakTime <= 0 && secs <= 0) {
+        clearInterval(breakTimer);
+        console.log("Break finished");
+        $(this).find("#message").html("Finished");
+        $(this).prop("disabled", true);
+      }
+    }, 1000);
+  }
+}
