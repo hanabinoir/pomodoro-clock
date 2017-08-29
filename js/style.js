@@ -2,7 +2,7 @@ $(document).ready(function() {
   var sessionLength = $("#session-length"),
   breakLength = $("#break-length");
 
-  console.log(navigator.appCodeName);
+  // console.log(navigator.appCodeName);
   $(".clock-settings > col-xs-1 > .fa-remove").css('visibility', 'hidden');
 
   if (navigator.appCodeName.indexOf("Mozilla") != -1) {
@@ -39,11 +39,11 @@ $(document).ready(function() {
         );
         $(this).removeClass('fa-check');
         $(this).addClass('fa-refresh');
-        $(this).parent().find('.fa-plus').css('visibility', 'visible');
+        $(this).parent().find('.fa-plus').css('visibility', 'inherit');
       } else {
           $(this).removeClass('fa-refresh');
           $(this).addClass('fa-check');
-          $(this).parent().find('.fa-plus').css('visibility', 'hidden');
+          $(this).parent().find('.fa-plus').css('visibility', 'inherit');
       }
   });
 

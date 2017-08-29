@@ -62,7 +62,7 @@
             {{session.sessionLabel}}:
             <input
             type="number"
-            id="{{session.sessionId}}"
+            class="sess"
             disabled="true"
             ng-value="{{session.sessionLength}}">
           </label>
@@ -72,7 +72,7 @@
             {{session.breakLable}}:
             <input
             type="number"
-            id="{{session.breakId}}"
+            class="brk"
             disabled="true"
             ng-value="{{session.breakLength}}">
           </label>
@@ -80,8 +80,10 @@
         <div class="col-sm-3">
           <div
           class="progress text-center"
+          id="{{session.sessId}}"
           ng-mouseenter="displayMessage($event)"
-          ng-mouseleave="hideMessage($event)">
+          ng-mouseleave="hideMessage($event)"
+          ng-click="countDown()">
             <div
             class="progress-bar"
             role="progressbar"
@@ -89,13 +91,15 @@
             aria-valuenow="25"
             aria-valuemin="0"
             aria-valuemax="100"></div>
-            <span id="mins">{{session.sessionLength}}</span>:
-            <span id="secs">00</span>
-            <span id="message">Not started</span>
+            <span class="mins">{{session.sessionLength}}</span>:
+            <span class="secs">00</span>
+            <span class="msg">Click to start</span>
           </div>
         </div>
         <div class="col-xs-2">
-          <i class="session-set fa fa-refresh"></i>
+          <i
+          class="session-set fa fa-refresh"
+          ng-click="countDown"></i>
           <i class="fa fa-remove"></i>
           <i class="fa fa-plus"></i>
         </div>
@@ -113,6 +117,6 @@
   type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
   <script src="https://use.fontawesome.com/60b538da21.js"></script>
   <script type="text/javascript" src="./js/style.js"></script>
-  <!-- <script type="text/javascript" src="./js/clock.js"></script> -->
+  <script type="text/javascript" src="./js/clock.js"></script>
   <script type="text/javascript" src="./js/controller.js"></script>
 </html>
