@@ -31,7 +31,7 @@
         </label>
       </div>
       <div class="col-sm-3">
-        <label for="num-f-sessions">
+        <label for="num-of-sessions">
           Number of Sessions:
           <input
           type="number"
@@ -64,7 +64,8 @@
             type="number"
             class="sess"
             disabled="true"
-            ng-value="{{session.sessionLength}}">
+            ng-value="{{session.sessionLength}}"
+            placeholder="{{session.sessionLength}}">
           </label>
         </div>
         <div class="col-sm-3">
@@ -74,7 +75,8 @@
             type="number"
             class="brk"
             disabled="true"
-            ng-value="{{session.breakLength}}">
+            ng-value="{{session.breakLength}}" 
+            placeholder="{{session.breakLength}}">
           </label>
         </div>
         <div class="col-sm-3">
@@ -98,10 +100,9 @@
         </div>
         <div class="col-xs-2">
           <i
-          class="session-set fa fa-refresh"
-          ng-click="countDown"></i>
-          <i class="fa fa-remove"></i>
-          <i class="fa fa-plus"></i>
+          class="session-set fa fa-refresh" ng-click="resetCurrent()"></i>
+          <i class="fa fa-remove" ng-click="removeCurrent()"></i>
+          <i class="fa fa-plus" ng-click="addNew()"></i>
         </div>
       </div>
     </div>

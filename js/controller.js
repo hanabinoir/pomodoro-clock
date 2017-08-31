@@ -17,12 +17,29 @@ clock.controller('session-ctrl', function($scope) {
   $scope.msgLog = "";
   $scope.btnLog = "";
 
+  var settingControls = function(setInputs=true, setVals=true) {
+    $("#session-length").attr('disabled', setInputs);
+    $("#break-length").attr('disabled', setInputs);
+    $("#num-of-sessions").attr('disabled', setInputs);
+
+    if (setVals) {
+      $("#session-length").attr('placeholder', $("#session-length").val());
+      $("#break-length").attr('placeholder', $("#break-length").val());
+      $("#num-of-sessions").attr('placeholder', $("#num-of-sessions").val());
+    } else {
+      $("#session-length").val($("#session-length").attr('placeholder'));
+      $("#break-length").val($("#break-length").attr('placeholder'));
+      $("#num-of-sessions").val($("#num-of-sessions").attr('placeholder'));
+    }
+  };
+
   $scope.setSessions = function() {
 
     if ($(event.currentTarget).hasClass('fa-check')) {
       var numOfSess = $("#num-of-sessions").val();
 
-      $scope.sessions =[];
+      $scope.sessions = [];
+      settingControls();
 
       for (var i = 0; i < numOfSess; i++) {
         var sessNum = i + 1;
@@ -37,14 +54,20 @@ clock.controller('session-ctrl', function($scope) {
     } else {
       clearInterval(sessTimer);
       clearInterval(breakTimer);
+      settingControls(false);
     }
 
   };
 
   $scope.cancelSettings = function() {
-    ("#session-length").val(("#session-length").attr('placeholder'));
-    ("#break-length").val(("#break-length").attr('placeholder'));
-  }
+    var current = $(event.currentTarget),
+    prev = current.prev('i');
+
+    current.css('visibility', 'hidden');
+    prev.removeClass('fa-check').addClass('fa-refresh');
+
+    settingControls(true, false);
+  };
 
   $scope.displayMessage = function() {
     var current = $(event.currentTarget);
@@ -143,6 +166,56 @@ clock.controller('session-ctrl', function($scope) {
       clearInterval(sessTimer);
       msgSpan.html('Session skipped');
     }
-  }
+  };
 
+  $scope.resetCurrent = function() {
+    var current = $(event.currentTarget),
+    msgSpan = current.closest('div').prev('div').find('span.msg'), 
+    inputs = current.closest('.pom-sess').find('input');
+
+    if (current.hasClass('fa-refresh')) {
+      if (msgSpan.html() == 'Click to stop') {
+        clearInterval(sessTimer);
+        clearInterval(breakTimer);
+      }
+      $.each(inputs, function(index, input) {
+        $(input).attr('disabled', false);
+        $(input).val($(input).attr('placeholder'));
+      });
+    } else {
+      $.each(inputs, function(index, input) {
+        $(input).attr('disabled', true);
+        $(input).attr('placeholder', $(input).val());
+      });
+    }
+  };
+
+  $scope.removeCurrent = function() {
+    var current = $(event.currentTarget),
+    msgSpan = current.closest('div').prev('div').find('span.msg'), 
+    currentId = current.closest('.pom-sess').find('div.process').attr('id');
+
+    if (msgSpan.html() == 'Click to stop') {
+      clearInterval(sessTimer);
+      clearInterval(breakTimer);
+    } else {
+      if (currentId = $scope.sessions.length) {
+        $scope.sessions.pop();
+      } else {
+        $scope.sessions.splice((currentId - 1), 1);
+      }
+    }
+  };
+
+  $scope.addNew = function() {
+    var sessIndex = $scope.sessions.length + 1;
+
+    $scope.sessions.push({
+      'sessionLabel': 'Session ' + sessIndex,
+      'breakLable': 'Break ' + sessIndex,
+      'sessionLength': sessionLength,
+      'breakLength': breakLength, 
+      'sessId': 'sess-' + (sessIndex + 1)
+    });
+  };
 });
