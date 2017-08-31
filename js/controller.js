@@ -92,7 +92,9 @@ clock.controller('session-ctrl', function($scope) {
   $scope.countDown = function() {
     var clock = $(event.currentTarget), 
     sessNum = parseInt(clock.attr('id').split('-')[1]), 
-    msgSpan = clock.children('span.msg');
+    msgSpan = clock.children('span.msg'), 
+    progressBar = clock.children('div.progress-bar'),
+    progress = 0;
 
     var setClock = function() {
       sessNum = parseInt(clock.attr('id').split('-')[1]); 
@@ -100,9 +102,12 @@ clock.controller('session-ctrl', function($scope) {
       secsSpan = clock.children('span.secs'); 
       mins = parseInt(minsSpan.closest('.pom-sess').find('.sess').val()); 
       secs = 0;
+      // progress = 0;
     };
 
     var setClockDisplay = function() {
+      // progressBar.attr('aria-valuenow', (progress / (mins * 60)) * 100);
+      // progressBar.css('width', (progress / (mins * 60)) * 100 + '%');
       minsSpan.html(mins);
       if (secs < 10) {
         secsSpan.html('0' + secs);
@@ -112,6 +117,7 @@ clock.controller('session-ctrl', function($scope) {
     };
     
     var sessCD = function() {
+      progress += 1;
       secs -= 1;
 
         if (secs < 0 ) {
@@ -131,6 +137,7 @@ clock.controller('session-ctrl', function($scope) {
     };
 
     var breakCD = function() {
+      progress += 1;
       secs -= 1;
 
       if (secs < 0 ) {
@@ -193,8 +200,11 @@ clock.controller('session-ctrl', function($scope) {
   $scope.removeCurrent = function() {
     var current = $(event.currentTarget),
     msgSpan = current.closest('div').prev('div').find('span.msg'), 
-    currentId = current.closest('.pom-sess').find('div.process').attr('id');
+    currentId = current.closest('.pom-sess').find('div.progress')
+    .attr('id').split('-')[1];
 
+    console.log(currentId);
+    console.log($scope.sessions.length);
     if (msgSpan.html() == 'Click to stop') {
       clearInterval(sessTimer);
       clearInterval(breakTimer);
@@ -215,7 +225,7 @@ clock.controller('session-ctrl', function($scope) {
       'breakLable': 'Break ' + sessIndex,
       'sessionLength': sessionLength,
       'breakLength': breakLength, 
-      'sessId': 'sess-' + (sessIndex + 1)
+      'sessId': 'sess-' + (sessIndex)
     });
   };
 });

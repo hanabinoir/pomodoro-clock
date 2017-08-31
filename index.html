@@ -1,12 +1,9 @@
 <!DOCTYPE html>
-<html
-  ng-app="clock"
-  ng-controller="session-ctrl">
+<html ng-app="clock" ng-controller="session-ctrl">
   <head>
     <meta charset="utf-8">
     <title>Pomodoro Clock</title>
-    <link
-    rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
     crossorigin="anonymous">
     <link rel="stylesheet" href="./css/master.css">
   </head>
@@ -15,107 +12,65 @@
       <div class="col-sm-3">
         <label for="session-length">
           Session Length:
-          <input
-          type="number"
-          id="session-length"
-          value="3">
+          <input type="number" id="session-length" value="3">
         </label>
       </div>
       <div class="col-sm-3">
         <label for="break-length">
           Break Length:
-          <input
-          type="number"
-          id="break-length"
-          value="1">
+          <input type="number" id="break-length" value="1">
         </label>
       </div>
       <div class="col-sm-3">
         <label for="num-of-sessions">
           Number of Sessions:
-          <input
-          type="number"
-          id="num-of-sessions"
-          value="3">
+          <input type="number" id="num-of-sessions" value="3">
         </label>
       </div>
       <div class="col-xs-1">
-        <i
-        class="sessions-set fa fa-check"
-        ng-click="setSessions()"></i>
-        <i
-        class="fa fa-remove"
-        ng-click="cancelSettings()"></i>
+        <i class="sessions-set fa fa-check" ng-click="setSessions()"></i>
+        <i class="fa fa-remove" ng-click="cancelSettings()"></i>
       </div>
     </div>
   </header>
   <body>
-    <div
-    class="container text-center">
-      <div
-      class="row pom-sess"
-      ng-repeat="session in sessions"
-      ng-mouseenter="displayButtons($event)"
-      ng-mouseleave="hideButtons($event)">
+    <div class="container text-center">
+      <div class="row pom-sess" ng-repeat="session in sessions" ng-mouseenter="displayButtons($event)" ng-mouseleave="hideButtons($event)">
         <div class="col-sm-3">
           <label for="session">
             {{session.sessionLabel}}:
-            <input
-            type="number"
-            class="sess"
-            disabled="true"
-            ng-value="{{session.sessionLength}}"
-            placeholder="{{session.sessionLength}}">
+            <input type="number" class="sess" disabled="true" ng-value="{{session.sessionLength}}" placeholder="{{session.sessionLength}}">
           </label>
         </div>
         <div class="col-sm-3">
           <label for="break">
             {{session.breakLable}}:
-            <input
-            type="number"
-            class="brk"
-            disabled="true"
-            ng-value="{{session.breakLength}}" 
-            placeholder="{{session.breakLength}}">
+            <input type="number" class="brk" disabled="true" ng-value="{{session.breakLength}}" placeholder="{{session.breakLength}}">
           </label>
         </div>
         <div class="col-sm-3">
-          <div
-          class="progress text-center"
-          id="{{session.sessId}}"
-          ng-mouseenter="displayMessage($event)"
-          ng-mouseleave="hideMessage($event)"
-          ng-click="countDown()">
-            <div
-            class="progress-bar"
-            role="progressbar"
-            style="width: 25%"
-            aria-valuenow="25"
-            aria-valuemin="0"
-            aria-valuemax="100"></div>
+          <div class="progress text-center" id="{{session.sessId}}" ng-mouseenter="displayMessage($event)" ng-mouseleave="hideMessage($event)" ng-click="countDown()">
+            <div class="progress-bar" role="progressbar" style="width: 0" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+              <!-- <span class="mins">{{session.sessionLength}}</span>:
+              <span class="secs">00</span>
+              <span class="msg">Click to start</span> -->
+            </div>
             <span class="mins">{{session.sessionLength}}</span>:
             <span class="secs">00</span>
             <span class="msg">Click to start</span>
           </div>
         </div>
         <div class="col-xs-2">
-          <i
-          class="session-set fa fa-refresh" ng-click="resetCurrent()"></i>
+          <i class="session-set fa fa-refresh" ng-click="resetCurrent()"></i>
           <i class="fa fa-remove" ng-click="removeCurrent()"></i>
           <i class="fa fa-plus" ng-click="addNew()"></i>
         </div>
       </div>
     </div>
   </body>
-  <script
-  src="https://code.jquery.com/jquery-3.2.1.js"
-  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
-  crossorigin="anonymous"></script>
-  <script
-  id="bootstrapjs" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-  crossorigin="anonymous"></script>
-  <script
-  type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+  <script id="bootstrapjs" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
   <script src="https://use.fontawesome.com/60b538da21.js"></script>
   <script type="text/javascript" src="./js/style.js"></script>
   <script type="text/javascript" src="./js/controller.js"></script>
