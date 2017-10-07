@@ -102,12 +102,9 @@ clock.controller('session-ctrl', function($scope) {
       secsSpan = clock.children('span.secs'); 
       mins = parseInt(minsSpan.closest('.pom-sess').find('.sess').val()); 
       secs = 0;
-      // progress = 0;
     };
 
     var setClockDisplay = function() {
-      // progressBar.attr('aria-valuenow', (progress / (mins * 60)) * 100);
-      // progressBar.css('width', (progress / (mins * 60)) * 100 + '%');
       minsSpan.html(mins);
       if (secs < 10) {
         secsSpan.html('0' + secs);
@@ -172,6 +169,10 @@ clock.controller('session-ctrl', function($scope) {
       sessionStarted = false;
       clearInterval(sessTimer);
       msgSpan.html('Session skipped');
+      clock.css({
+        cursor: 'wait',
+        'pointer-events': 'none'
+      });
     }
   };
 
